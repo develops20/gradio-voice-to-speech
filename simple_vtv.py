@@ -8,6 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 
 def voice_to_voice(audio_file):
 
@@ -35,7 +36,7 @@ def voice_to_voice(audio_file):
     
 
 def audio_transcription(audio_file): 
-    aai.settings.api_key = "c918e7dd6415435fae86ce36284d5530"
+    aai.settings.api_key = os.getenv("ASSEMBLY_API_KEY")
     transcriber = aai.Transcriber()
     transcription = transcriber.transcribe(audio_file)
     return transcription
@@ -57,7 +58,7 @@ def text_translation(text):
 
 def text_to_speech(text): 
     client = ElevenLabs(
-        api_key="sk_62c43becf123ea3fc6d7bb81d7efc6b97e0009099e528b92"
+        api_key=os.getenv("ELEVENLABS_API_KEY")
     )
     
     # Calling the text_to_speech conversion API with detailed parameters
